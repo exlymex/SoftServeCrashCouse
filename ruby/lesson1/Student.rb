@@ -6,27 +6,35 @@ class Student
   attr_accessor :surname, :name, :date_of_birth
 
   def initialize(surname, name, date_of_birth)
-    @surname = surname
-    @name = name
     @date_of_birth = validate_date_of_birth(date_of_birth)
     validate_age
+    @surname = surname
+    @name = name
     add_student
   end
 
   def calculate_age
     today = Date.today
-    age = today.year - @date_of_birth.year
-    age -= 1 if Date.new(today.year, @date_of_birth.month, @date_of_birth.day) > today
-    age
+    birth_day_this_year = Date.new(today.year, @date_of_birth.month, @date_of_birth.day)
+
+    if today >= birth_day_this_year
+      today.year - @date_of_birth.year
+    else
+      today.year - @date_of_birth.year - 1
+    end
   end
 
+
   def add_student
-    if @@students.any? { |student| student.surname == surname && student.name == name && student.date_of_birth == date_of_birth }
+    is_duplicate = @@students.any? { |student| student.surname == surname && student.name == name && student.date_of_birth == date_of_birth }
+
+    if is_duplicate
       raise ArgumentError, 'This student has already been added.'
     else
       @@students << self
     end
   end
+
 
   def remove_student
     @@students.delete(self)
