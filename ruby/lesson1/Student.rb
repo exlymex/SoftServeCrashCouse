@@ -24,7 +24,6 @@ class Student
     end
   end
 
-
   def add_student
     is_duplicate = @@students.any? { |student| student.surname == surname && student.name == name && student.date_of_birth == date_of_birth }
 
@@ -35,9 +34,8 @@ class Student
     end
   end
 
-
-  def remove_student
-    @@students.delete(self)
+  def self.remove_student(student)
+    @@students.delete(student)
   end
 
   def self.get_students_by_age(age)
@@ -63,7 +61,5 @@ class Student
   end
 end
 
-Student.new('Pavlo', 'Borysov', Date.new(1990, 1, 1))
+Student.new('Pavlo', 'Borysov', Date.new(2003, 11, 13))
 Student.new('Vasyl', 'Vengrov', Date.new(1995, 2, 2))
-
-p Student.all_students
