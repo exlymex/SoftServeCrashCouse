@@ -50,6 +50,8 @@ class Student
     @@students
   end
 
+  private
+
   def validate_date_of_birth(date_of_birth)
     raise ArgumentError, 'Date of birth must be in the past.' if date_of_birth > Date.today
     date_of_birth
