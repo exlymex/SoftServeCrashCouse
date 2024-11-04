@@ -7,7 +7,6 @@ class Student
 
   def initialize(surname, name, date_of_birth)
     @date_of_birth = validate_date_of_birth(date_of_birth)
-    validate_age
     @surname = surname
     @name = name
     add_student
@@ -57,11 +56,4 @@ class Student
     date_of_birth
   end
 
-  def validate_age
-    age = calculate_age
-    raise ArgumentError, 'Student age must be between 5 and 100 years.' unless age.between?(5, 100)
-  end
 end
-
-Student.new('Pavlo', 'Borysov', Date.new(2003, 11, 13))
-Student.new('Vasyl', 'Vengrov', Date.new(1995, 2, 2))
